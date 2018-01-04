@@ -25,6 +25,7 @@ function paginate(query, options, callback) {
   let lean = options.lean || false;
   let leanWithId = options.leanWithId ? options.leanWithId : true;
   let limit = options.limit ? options.limit : 10;
+  let projection = options.projection : {};
   let page, offset, skip, promises;
   if (options.offset) {
     offset = options.offset;
@@ -38,7 +39,7 @@ function paginate(query, options, callback) {
     skip = offset;
   }
   if (limit) {
-    let docsQuery = this.find(query)
+    let docsQuery = this.find(query, projection)
       .select(select)
       .sort(sort)
       .skip(skip)
